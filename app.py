@@ -21,6 +21,27 @@ import json
 import numpy as np
 import pickle
 
+
+#Required for model 
+import numpy as np
+import pandas as pd
+import seaborn as sns
+from sklearn.impute import SimpleImputer
+from scipy.stats import skew
+from sklearn.model_selection import train_test_split
+from xgboost import XGBClassifier
+from sklearn.preprocessing import MinMaxScaler
+from sklearn.metrics import confusion_matrix, classification_report
+from sklearn.metrics import accuracy_score
+from sklearn.metrics import cohen_kappa_score
+from sklearn.model_selection import RandomizedSearchCV
+from sklearn.ensemble import RandomForestClassifier
+from sklearn.metrics import classification_report, confusion_matrix, accuracy_score
+import sklearn.metrics as metrics
+from sklearn.naive_bayes import GaussianNB  
+import lightgbm as lgb
+from sklearn.neighbors import KNeighborsClassifier
+
 # Import for Migrations
 from flask_migrate import Migrate, migrate
 
