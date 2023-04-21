@@ -121,7 +121,7 @@ def index2():
         return render_template("sample_registration.html")
 
 
-@app.route('/pages/<pxrf_values>', methods=["GET", "POST"])
+@app.route('/predict', methods=["GET", "POST"])
 def predict():
 
     xrf_fe = float(request.form.get("xrf_fe"))

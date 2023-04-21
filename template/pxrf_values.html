@@ -26,16 +26,13 @@
 
 <body>
 	<div class="container">
-		<div style="position: absolute;top:50px;right: 30px;">
+		<div style="position: absolute;top:50px;right: 30px;" hidden>
 			<img src="/static/pxrf.jpg" class="rounded mx-auto d-block" alt="pxrf elemental values">
 		</div>
-
-
 		<h1 style="text-align: center;" class="m-2">PXRF values</h1>
 
-		<form method="POST">
-
-			<input type="text" name="crop_variety" hidden value="{{ data }}">
+		<form id="pxrf_values">
+			<input type=" text" name="crop_variety" hidden value="{{ data }}">
 			<input type="text" name="pid" hidden value="{{ id }}">
 
 			<div class="form-row">
@@ -126,9 +123,8 @@
 
 
 	</div>
-	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
-		integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
-		crossorigin="anonymous"></script>
+	<script src="https://code.jquery.com/jquery-3.6.4.min.js"
+		integrity="sha256-oP6HI9z1XaZNBrJURtCoUT5SUnxFr8s3BzRl+cbzUq8=" crossorigin="anonymous"></script>
 	<script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.7/dist/umd/popper.min.js"
 		integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
 		crossorigin="anonymous"></script>
@@ -136,18 +132,24 @@
 		integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
 		crossorigin="anonymous"></script>
 	<script>
-		var crop_group_data = { "Cereals": ["Rice", "Wheat", "Maize", "Corn", "Barley"], "Pulses": ["Green gram", "Black gram", "Red gram", "Bengal gram", "Cowpea", "Chickpea", "Lentil"], "Oilseeds": ["Mustard", "Sesame", "Rapeseed", "Groundnut", "Soybean", "Sunflower"], "Vegetables": ["Potato", "Onion", "Tomato", "Chilli", "Cauliflower", "Broccoli", "Cabbage", "Beans", "Cucumber", "Garlic", "Okra"], "Fruits": ["Mango", "Grapes", "Apple", "Orange", "Guava", "Lichi", "Papaya"], "Cash crops": ["Jute", "Sugarcane", "Cotton"] };
-
-		$("#crop_group").on('change', function () {
-			var crops = crop_group_data[this.value];
-			var cro = "<option selected disabled>Select Crop</option>";
-			for (let i = 0; i < crops.length; i++) {
-				cro += "<option value='" + crops[i] + "'>" + crops[i] + "</option>\n";
-			}
-			//console.log(dis);
-			$("#crop").html(cro);
+		$('#pxrf_values').submit(function (e) {
+			e.preventDefault();
+			var data = $(this).serialize();
+			$.ajax({
+				type: "POST",
+				url: "/predict",
+				data: data,
+				success: function (response) {
+					console.log(response);
+					// $('#pxrf_values').trigger("reset");
+					// $('#pxrf_values').append('<div class="alert alert-success" role="alert">Data saved successfully</div>');
+				},
+				error: function (error) {
+					console.log(error);
+					// $('#pxrf_values').append('<div class="alert alert-danger" role="alert">Data not saved</div>');
+				}
+			});
 		});
-
 	</script>
 </body>
 
