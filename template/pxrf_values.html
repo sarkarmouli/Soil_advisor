@@ -141,12 +141,11 @@
 				data: data,
 				success: function (response) {
 					console.log(response);
-					// $('#pxrf_values').trigger("reset");
-					// $('#pxrf_values').append('<div class="alert alert-success" role="alert">Data saved successfully</div>');
+					window.sessionStorage.setItem("prediction_result", JSON.stringify(response));
+					window.location.href = "/pages/result.html";
 				},
 				error: function (error) {
 					console.log(error);
-					// $('#pxrf_values').append('<div class="alert alert-danger" role="alert">Data not saved</div>');
 				}
 			});
 		});

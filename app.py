@@ -13,7 +13,7 @@
 # if __name__== "__main__":
 #     app.run(debug=True)
 
-from flask import Flask, request, render_template, send_from_directory
+from flask import Flask, request, render_template, send_from_directory, jsonify
 from flask.templating import render_template
 from flask_sqlalchemy import SQLAlchemy
 import os
@@ -22,7 +22,7 @@ import numpy as np
 import pickle
 
 
-#Required for model 
+# Required for model
 import numpy as np
 import pandas as pd
 import seaborn as sns
@@ -38,7 +38,7 @@ from sklearn.model_selection import RandomizedSearchCV
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.metrics import classification_report, confusion_matrix, accuracy_score
 import sklearn.metrics as metrics
-from sklearn.naive_bayes import GaussianNB  
+from sklearn.naive_bayes import GaussianNB
 import lightgbm as lgb
 from sklearn.neighbors import KNeighborsClassifier
 
@@ -154,7 +154,7 @@ def predict():
     xrf_mn = float(request.form.get("xrf_mn"))
     xrf_co = float(request.form.get("xrf_co"))
     xrf_cr = float(request.form.get("xrf_cr"))
-    xrf_v =  float(request.form.get("xrf_v"))
+    xrf_v = float(request.form.get("xrf_v"))
     xrf_sr = float(request.form.get("xrf_sr"))
     xrf_zn = float(request.form.get("xrf_zn"))
     xrf_sb = float(request.form.get("xrf_sb"))
@@ -162,8 +162,9 @@ def predict():
     xrf_ag = float(request.form.get("xrf_ag"))
     xrf_as = float(request.form.get("xrf_as"))
 
-    full_inp = (xrf_fe, xrf_k, xrf_ti, xrf_ca, xrf_ba, xrf_zr, xrf_mn, xrf_co, xrf_cr, xrf_v, xrf_sr, xrf_zn, xrf_sb,xrf_pb, xrf_ag, xrf_as)
-    
+    full_inp = (xrf_fe, xrf_k, xrf_ti, xrf_ca, xrf_ba, xrf_zr, xrf_mn,
+                xrf_co, xrf_cr, xrf_v, xrf_sr, xrf_zn, xrf_sb, xrf_pb, xrf_ag, xrf_as)
+
     def func_agc(full_inp):
         with open('static/models/agc_xgb.pkl', 'rb') as f:
             xgb = pickle.load(f)
@@ -171,26 +172,24 @@ def predict():
         input_data_as_numpy_array = np.asarray(full_inp)
 
         # reshape the array as we are predicting for one instance
-        input_data_reshaped = input_data_as_numpy_array.reshape(1,-1)
+        input_data_reshaped = input_data_as_numpy_array.reshape(1, -1)
 
         prediction = xgb.predict(input_data_reshaped)
         print(prediction)
 
         if (prediction[0] == 0):
-            print('The agro-climatic region is Coastal Saline zone')
-        elif (prediction[0]==1):
-            print('The agro-climatic region is Gangetic Alluvial Zone')
-        elif (prediction[0]==2):
-            print('The agro-climatic region is Red and Lateritic zone ')
-        elif (prediction[0]==3):
-            print('The agro-climatic region is Terai-Teesta Alluvial ')
-        elif (prediction[0]==4):
-            print('The agro-climatic region is Vindhyachal alluvial zone')
+            return 'The agro-climatic region is Coastal Saline zone'
+        elif (prediction[0] == 1):
+            return 'The agro-climatic region is Gangetic Alluvial Zone'
+        elif (prediction[0] == 2):
+            return 'The agro-climatic region is Red and Lateritic zone '
+        elif (prediction[0] == 3):
+            return 'The agro-climatic region is Terai-Teesta Alluvial '
+        elif (prediction[0] == 4):
+            return 'The agro-climatic region is Vindhyachal alluvial zone'
         else:
-            print('The agro-climatic region is northern hilley zone ')  
+            return 'The agro-climatic region is northern hilley zone '
 
-        return prediction 
-    
     def func_pm(full_inp):
         with open('static/models/pm_lgb.pkl', 'rb') as f:
             lgb = pickle.load(f)
@@ -198,22 +197,20 @@ def predict():
         input_data_as_numpy_array = np.asarray(full_inp)
 
         # reshape the array as we are predicting for one instance
-        input_data_reshaped = input_data_as_numpy_array.reshape(1,-1)
+        input_data_reshaped = input_data_as_numpy_array.reshape(1, -1)
 
         prediction = lgb.predict(input_data_reshaped)
         print(prediction)
 
         if (prediction[0] == 0):
-            print('The parent material is Recent alluvium')
-        elif (prediction[0]==1):
-            print('The parent material is old alluvium')
-        elif (prediction[0]==2):
-            print('The parent material is Granite-Gneiss')
+            return 'The parent material is Recent alluvium'
+        elif (prediction[0] == 1):
+            return 'The parent material is old alluvium'
+        elif (prediction[0] == 2):
+            return 'The parent material is Granite-Gneiss'
         else:
-            print('The parent material is deltaic alluvium')
+            return 'The parent material is deltaic alluvium'
 
-        return prediction
-    
     def func_so(full_inp):
         with open('static/models/so_xgb.pkl', 'rb') as f:
             xgb = pickle.load(f)
@@ -221,19 +218,18 @@ def predict():
         input_data_as_numpy_array = np.asarray(full_inp)
 
         # reshape the array as we are predicting for one instance
-        input_data_reshaped = input_data_as_numpy_array.reshape(1,-1)
+        input_data_reshaped = input_data_as_numpy_array.reshape(1, -1)
 
         prediction = xgb.predict(input_data_reshaped)
         print(prediction)
 
         if (prediction[0] == 0):
-            print('Soil Order is alfisol')
-        elif (prediction[0]==1):
-            print('The Soil Order is inceptisol')
+            return 'Soil Order is alfisol'
+        elif (prediction[0] == 1):
+            return 'The Soil Order is inceptisol'
         else:
-            print('The Soil Order is entisol')
-        return prediction
-    
+            return 'The Soil Order is entisol'
+
     def func_pp(full_inp):
         with open('static/models/pp_xgb.pkl', 'rb') as f:
             xgb = pickle.load(f)
@@ -241,19 +237,17 @@ def predict():
         input_data_as_numpy_array = np.asarray(full_inp)
 
         # reshape the array as we are predicting for one instance
-        input_data_reshaped = input_data_as_numpy_array.reshape(1,-1)
+        input_data_reshaped = input_data_as_numpy_array.reshape(1, -1)
 
         prediction = xgb.predict(input_data_reshaped)
         print(prediction)
 
         if (prediction[0] == 0):
-            print('Soil productivity potential high')
-        elif (prediction[0]==1):
-            print('Soil productivity potential medium')
+            return 'Soil productivity potential high'
+        elif (prediction[0] == 1):
+            return 'Soil productivity potential medium'
         else:
-            print('Soil productivity potential low')
-        return prediction
-
+            return 'Soil productivity potential low'
 
     def func_OC(full_inp):
         with open('static/models/OC_rfc.pkl', 'rb') as f:
@@ -262,19 +256,18 @@ def predict():
         input_data_as_numpy_array = np.asarray(full_inp)
 
         # reshape the array as we are predicting for one instance
-        input_data_reshaped = input_data_as_numpy_array.reshape(1,-1)
+        input_data_reshaped = input_data_as_numpy_array.reshape(1, -1)
 
         prediction = rfc.predict(input_data_reshaped)
         print(prediction)
 
         if (prediction[0] == 0):
-            print('Organic Carbon in soil medium')
-        elif (prediction[0]==1):
-            print('Organic Carbon in soil low')
+            return 'Organic Carbon in soil medium'
+        elif (prediction[0] == 1):
+            return 'Organic Carbon in soil low'
         else:
-            print('Organic Carbon in soil high')
-        return prediction
-    
+            return 'Organic Carbon in soil high'
+
     def func_pH(full_inp):
         with open('static/models/pH_rfc.pkl', 'rb') as f:
             rfc = pickle.load(f)
@@ -282,19 +275,17 @@ def predict():
         input_data_as_numpy_array = np.asarray(full_inp)
 
         # reshape the array as we are predicting for one instance
-        input_data_reshaped = input_data_as_numpy_array.reshape(1,-1)
+        input_data_reshaped = input_data_as_numpy_array.reshape(1, -1)
 
         prediction = rfc.predict(input_data_reshaped)
-        print(prediction)
 
         if (prediction[0] == 0):
-            print('Soil is moderately to slightly acidic')
-        elif (prediction[0]==1):
-            print('Soil is neutral to slightly alkaline')
+            return 'Soil is moderately to slightly acidic'
+        elif (prediction[0] == 1):
+            return 'Soil is neutral to slightly alkaline'
         else:
-            print('Soil is strongly to highly acidic')
-        return prediction
-    
+            return 'Soil is strongly to highly acidic'
+
     agc_result = func_agc(full_inp)
     pm_result = func_pm(full_inp)
     so_result = func_so(full_inp)
@@ -302,12 +293,14 @@ def predict():
     OC_result = func_OC(full_inp)
     pH_result = func_pH(full_inp)
 
-    result = {"result":[agc_result,pm_result,so_result,pp_result,OC_result,pH_result]}
-    return render_template("result.html")
-    
-    
-    
-   
+    result = {"result": {"Agro Climatic Zone": agc_result,
+                         "Parent Material": pm_result,
+                         "Soil Order": so_result,
+                         "Productivity Potential": pp_result,
+                         "Organic Carbon": OC_result,
+                         "pH": pH_result}}
+    return jsonify(result)
+
 
 if __name__ == "__main__":
     app.run(debug=True)

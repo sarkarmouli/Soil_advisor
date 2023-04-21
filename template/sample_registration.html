@@ -66,7 +66,11 @@
 				<input type="number" name="phone" min="5000000000" max="9999999999" class="form-control" id="phone"
 					placeholder="Enter phone number" required>
 			</div>
-
+			<div class="form-group">
+				<label for="sample_number">Sample Number</label>
+				<input type="text" name="sample_number" class="form-control" id="sample_number"
+					placeholder="Enter Sample Number" required>
+			</div>
 			<div class="form-group">
 				<label for="prev_crop">Previous crop:</label>
 				<input type="text" name="prev_crop" class="form-control" id="prev_crop"
@@ -91,6 +95,10 @@
 				district: $('#district').val(),
 				block: $('#block').val(),
 				village: $('#village').val(),
+				prev_crop: $('#prev_crop').val(),
+				name: $('#name').val(),
+				phone: $('#phone').val(),
+				sample_number: $('#sample_number').val()
 			}
 
 			window.sessionStorage.setItem('sample_registration_data', JSON.stringify(data))

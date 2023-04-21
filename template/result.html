@@ -1,15 +1,17 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-    <title>Document</title>
-    <style type="text/css">
-    	.hidden {
-    		display: none;
-    	}
-    </style>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css"
+		integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+	<title>Document</title>
+	<style type="text/css">
+		.hidden {
+			display: none;
+		}
+	</style>
 </head>
 <style>
 	body {
@@ -20,43 +22,58 @@
 		background-position: center;
 		height: 100%;
 	}
-
 </style>
+
 <body>
-<div class="container">
+	<div class="container">
+		<h1 style="text-align: center;" class="m-2">Soil Properties Prediction</h1>
+		<hr>
+		<p style="font-weight: bold;"> Sensor used: Portable X-ray Fluorescence Spectrometer </p>
+		<p style="font-weight: bold;"> Farmer's name: <span id="farmer_name"></span></p>
+		<p style="font-weight: bold;"> Mobile number: <span id="mobile_number"></span></p>
+		<p style="font-weight: bold;"> State: <span id="state"></span> </p>
+		<p style="font-weight: bold;"> District: <span id="district"></span></p>
+		<p style="font-weight: bold;"> Block: <span id="block"></span></p>
+		<p style="font-weight: bold;"> Village: <span id="village"></span></p>
+		<p style="font-weight: bold;"> Target crop: <span id="target_crop"></span></p>
+		<p style="font-weight: bold;"> Soil sample number: <span id="sample_number"></span></p>
+		<p> <br> </p>
+		<div style="background-color: white;">
+			<h3 style="text-align: center;" class="m-2">Test Result </h3>
+			<span id="test_result" style="margin-left: 20px;">
 
-
-<h1 style="text-align: center;" class="m-2">Soil Properties Prediction</h1>
-<hr>
-<p style="font-weight: bold;"> Sensor used: Portable X-ray Fluorescence Spectrometer </p> 
-<p style="font-weight: bold;"> Farmer's name: {{name}} </p> 
-<p style="font-weight: bold;"> Mobile number: {{phone}} </p> 
-<p style="font-weight: bold;"> State: {{state}} </p>
-<p style="font-weight: bold;"> District: {{district}} </p> 
-<p style="font-weight: bold;"> Block: {{block}} </p> 
-<p style="font-weight: bold;"> Village: {{village}} </p> 
-<p style="font-weight: bold;"> Target crop: {{crop}} </p>
-<p style="font-weight: bold;"> Soil sample number: {{id}} </p>
-<p> <br> </p>
-
-<h3 style="text-align: center;" class="m-2">Test Result </h1>
-
-<div class="slidecontainer hidden mb-5">
-  <label for="target_yield">Target Yield (in q ha<sup>-1</sup>): <span id="demo"></span> </label>
-  <input type="range" class="form-control-range" id="target_yield">
-</div>
-
-<table class="table table-bordered text-center" id="result"></table>
-
-<div class="text-center mb-4">
-<button onclick="window.print()" class="btn btn-primary">Print Report</button>
-</div>
-
-
-</div>
-<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.7/dist/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
-
+			</span>
+		</div>
+	</div>
+	<script src="https://code.jquery.com/jquery-3.6.4.min.js"
+		integrity="sha256-oP6HI9z1XaZNBrJURtCoUT5SUnxFr8s3BzRl+cbzUq8=" crossorigin="anonymous"></script>
+	<script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.7/dist/umd/popper.min.js"
+		integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+		crossorigin="anonymous"></script>
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/js/bootstrap.min.js"
+		integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+		crossorigin="anonymous"></script>
+	<script type="text/javascript">
+		$(document).ready(function () {
+			const registration_data = JSON.parse(window.sessionStorage.getItem('sample_registration_data'));
+			const crop_details = JSON.parse(window.sessionStorage.getItem('crop_details'));
+			const prediction_result = JSON.parse(window.sessionStorage.getItem('prediction_result'))['result'];
+			$('#farmer_name').text(registration_data.name);
+			$('#mobile_number').text(registration_data.phone);
+			$('#state').text(registration_data.state);
+			$('#district').text(registration_data.district);
+			$('#block').text(registration_data.block);
+			$('#village').text(registration_data.village);
+			$('#target_crop').text(crop_details.crop);
+			$('#sample_number').text(registration_data.sample_number);
+			// write a function to show test results where keys and values will be separated colons and each result will be in a new line
+			let test_result = '';
+			for (let key in prediction_result) {
+				test_result += `<p style="font-weight: bold;">${key}: ${prediction_result[key]}</p>`;
+			}
+			$('#test_result').html(test_result);
+		});
+	</script>
 </body>
+
 </html>
