@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css"
+		integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+	<title>Crop Details</title>
+</head>
+<style>
+	body {
+		background-image: url('/static/soil.jpg');
+		background-repeat: no-repeat;
+		background-attachment: fixed;
+		background-size: cover;
+		background-position: center;
+		height: 100%;
+	}
+
+</style>
+
+<body>
+	<div class="container">
+
+		<h1 style="text-align: center;" class="m-2"><b>Crop Details</b></h1>
+
+		<form method="POST">
+
+			<input type="number" name="id" value="{{ id }}" hidden>
+
+			<div class="form-group">
+				<label for="crop_group"><b>Crop Group:</b></label>
+				<select name="crop_group" class="form-control" id="crop_group" required>
+					<option selected disabled>Select Crop Group</option>
+					<option value="Cereals">Cereals</option>
+					<option value="Pulses">Pulses</option>
+					<option value="Oilseeds">Oilseeds</option>
+					<option value="Vegetables">Vegetables</option>
+					<option value="Fruits">Fruits</option>
+					<option value="Cash crops">Cash crops</option>
+				</select>
+			</div>
+
+			<div class="form-group">
+				<label for="crop">Crop:</label>
+				<select name="crop" class="form-control" id="crop" required>
+					<option selected disabled>Select Crop</option>
+				</select>
+			</div>
+
+			<!-- <div class="form-group">
+				<label for="variety">Variety:</label>
+				<select name="variety" class="form-control" id="variety">
+					<option selected disabled>Select Variety</option>
+				</select>
+			</div> -->
+
+			<div class="form-group">
+				<label for="season">Season:</label>
+				<select name="season" class="form-control" id="season" required>
+					<option selected disabled>Select Season</option>
+					<option>Pre kharif</option>
+					<option>Kharif</option>
+					<option>Winter</option>
+				</select>
+			</div>
+
+			<div class="form-group">
+				<label for="crop_duration">Crop Duration:</label>
+				<select name="crop_duration" class="form-control" id="crop_duration" required>
+					<option selected disabled>Select Crop Duration</option>
+					<option>Short</option>
+					<option>Medium</option>
+					<option>Long</option>
+				</select>
+			</div>
+
+			<div class="form-group">
+				<label for="soil_type">Soil Type:</label>
+				<select name="soil_type" class="form-control" id="soil_type" required>
+					<option selected disabled>Select Soil Type</option>
+					<option>Alluvial soil</option>
+					<option>Black Cotton soil</option>
+					<option>Red & Yellowsoil</option>
+					<option>Laterite soil</option>
+					<option>Arid/Desert soil</option>
+					<option>Mountainous/Forest soil</option>
+					<option>Saline and Alkaline soil</option>
+					<option>Peaty and Marshy soil</option>
+				</select>
+			</div>
+
+			<div class="form-group">
+				<label for="Soil_moisture_content">Soil Moisture Content</label>
+				<select name="Soil_moisture_content" class="form-control" id="Soil_moisture_content" required>
+					<option selected disabled>Select Crop Duration</option>
+					<option>Very wet</option>
+					<option>Wet</option>
+					<option>Moderate</option>
+					<option>Dry</option>
+					<option>Very dry</option>
+				</select>
+			</div>
+
+
+
+			<div class="form-group">
+				<label for="irrigation">Irrigation:</label>
+				<select name="irrigation" class="form-control" id="irrigation" required>
+					<option selected disabled>Select Irrigation</option>
+					<option>Irrigated</option>
+					<option>Rainfed</option>
+				</select>
+			</div>
+
+			<button type="submit" class="btn btn-primary">Continue</button>
+		</form>
+
+
+	</div>
+	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+		integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+		crossorigin="anonymous"></script>
+	<script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.7/dist/umd/popper.min.js"
+		integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+		crossorigin="anonymous"></script>
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/js/bootstrap.min.js"
+		integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+		crossorigin="anonymous"></script>
+	<script>
+		var crop_group_data = { "Cereals": ["Rice", "Wheat", "Maize", "Corn", "Barley"], "Pulses": ["Green gram", "Black gram", "Red gram", "Bengal gram", "Cowpea", "Chickpea", "Lentil"], "Oilseeds": ["Mustard", "Sesame", "Rapeseed", "Groundnut", "Soybean", "Sunflower"], "Vegetables": ["Potato", "Onion", "Tomato", "Chilli", "Cauliflower", "Broccoli", "Cabbage", "Radish", "Carrot", "Amaranth", "Pointed Gourd", "Beans", "Cucumber", "Garlic", "Okra"], "Fruits": ["Mango", "Grapes", "Apple", "Orange", "Guava", "Lichi", "Papaya"], "Cash crops": ["Jute", "Sugarcane", "Cotton"] };
+
+		var crop_variety_data = { "Cabbage": ["Green express"], "Radish": ["Kalpin Red"], "Carrot": ["Early Nantin"], "Onion": ["Suksagar"], "Amaranth": ["Laljhar Katowa"], "Cauliflower": ["Casmiri"], "Tomato": ["PAN 1286", "Amlic"], "Okra": ["Sakti Hybdid"], "Broccoli": ["CSH-1"], "Pointed Gourd": ["Haibathkali"], "Cowpea": ["All variety"], "Wheat": ["UP-262", "PBW-343"], "Sunflower": ["PAC-36"], "Rapeseed": ["B-9"], "Groundnut": ["TAK-24"], "Rice": ["Boro rice (IET-4786)", "Kharif rice"], "Potato": ["Kufri Jyoti", "Kufri chandramukhi"] };
+
+		$("#crop_group").on('change', function () {
+			var crops = crop_group_data[this.value];
+			var cro = "<option selected disabled>Select Crop</option>";
+			for (let i = 0; i < crops.length; i++) {
+				cro += "<option value='" + crops[i] + "'>" + crops[i] + "</option>\n";
+			}
+			//console.log(dis);
+			$("#crop").html(cro);
+			$("#variety").html("<option selected disabled>Select Variety</option>")
+		});
+
+		$("#crop").on('change', function () {
+			if (this.value in crop_variety_data) {
+				var crops_variety = crop_variety_data[this.value];
+				var crops_var = "<option selected disabled>Select Variety</option>";
+				for (let i = 0; i < crops_variety.length; i++) {
+					crops_var += "<option value='" + crops_variety[i] + "'>" + crops_variety[i] + "</option>\n";
+				}
+				//console.log(dis);
+				$("#variety").html(crops_var);
+			}
+			else {
+				$("#variety").html("<option selected disabled>Select Variety</option>")
+			}
+
+		});
+
+	</script>
+</body>
+
+</html>

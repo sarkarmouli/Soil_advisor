@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css"
+		integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+	<title>PXRF Values</title>
+</head>
+<style>
+	/* h1 {
+		color: black;
+		text-shadow: 2px 2px 4px #000000;
+	} */
+
+	body {
+		background-image: url('/static/soil.jpg');
+		background-repeat: no-repeat;
+		background-attachment: fixed;
+		background-size: cover;
+		background-position: center;
+		height: 100%;
+	}
+</style>
+
+<body>
+	<div class="container">
+		<div style="position: absolute;top:50px;right: 30px;">
+			<img src="/static/pxrf.jpg" class="rounded mx-auto d-block" alt="pxrf elemental values">
+		</div>
+
+
+		<h1 style="text-align: center;" class="m-2">PXRF values</h1>
+
+		<form method="POST">
+
+			<input type="text" name="crop_variety" hidden value="{{ data }}">
+			<input type="text" name="pid" hidden value="{{ id }}">
+
+			<div class="form-row">
+				<div class="form-group col-md-3">
+					<label for="phone">XRF Fe (in ppm)</label>
+					<input type="text" name="xrf_fe" class="form-control" required>
+				</div>
+
+				<div class="form-group col-md-3">
+					<label for="phone">XRF K (in ppm)</label>
+					<input type="text" name="xrf_k" min="0" max="100" class="form-control" required>
+				</div>
+
+				<div class="form-group col-md-3">
+					<label for="phone">XRF Ti (in ppm)</label>
+					<input type="text" name="xrf_ti" class="form-control" required>
+				</div>
+
+				<div class="mb-3">
+					<label for="phone">XRF Ca (in ppm)</label>
+					<input type="text" name="xrf_ca" min="0" max="100" class="form-control" required>
+				</div>
+
+				<div class="form-group col-md-3">
+					<label for="phone">XRF Ba (in ppm)</label>
+					<input type="text" name="xrf_ba" class="form-control" required>
+				</div>
+
+				<div class="form-group col-md-3">
+					<label for="phone">XRF Zr (in ppm)</label>
+					<input type="text" name="xrf_zr" class="form-control" required>
+				</div>
+
+				<div class="form-group col-md-3">
+					<label for="phone">XRF Mn (in ppm)</label>
+					<input type="text" name="xrf_mn" class="form-control" required>
+				</div>
+
+				<div class="mb-3">
+					<label for="phone">XRF Co (in ppm)</label>
+					<input type="text" name="xrf_co" class="form-control" required>
+				</div>
+
+				<div class="form-group col-md-3">
+					<label for="phone">XRF Cr (in ppm)</label>
+					<input type="text" name="xrf_cr" class="form-control" required>
+				</div>
+
+				<div class="form-group col-md-3">
+					<label for="phone">XRF V (in ppm)</label>
+					<input type="text" name="xrf_v" class="form-control" required>
+				</div>
+
+				<div class="form-group col-md-3">
+					<label for="phone">XRF Sr (in ppm)</label>
+					<input type="text" name="xrf_sr" class="form-control" required>
+				</div>
+
+				<div class="mb-3">
+					<label for="phone">XRF Zn (in ppm)</label>
+					<input type="text" name="xrf_zn" class="form-control" required>
+				</div>
+
+				<div class="form-group col-md-3">
+					<label for="phone">XRF Sb (in ppm)</label>
+					<input type="text" name="xrf_sb" class="form-control" required>
+				</div>
+
+				<div class="form-group col-md-3">
+					<label for="phone">XRF Pb (in ppm)</label>
+					<input type="text" name="xrf_pb" class="form-control" required>
+				</div>
+
+				<div class="form-group col-md-3">
+					<label for="phone">XRF Ag (in ppm)</label>
+					<input type="text" name="xrf_ag" class="form-control" required>
+				</div>
+
+				<div class="mb-3">
+					<label for="phone">XRF As (in ppm)</label>
+					<input type="text" name="xrf_as" class="form-control" required>
+				</div>
+
+			</div>
+			<button type="submit" class="btn btn-primary">Predict</button>
+		</form>
+
+
+
+	</div>
+	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+		integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+		crossorigin="anonymous"></script>
+	<script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.7/dist/umd/popper.min.js"
+		integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+		crossorigin="anonymous"></script>
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/js/bootstrap.min.js"
+		integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+		crossorigin="anonymous"></script>
+	<script>
+		var crop_group_data = { "Cereals": ["Rice", "Wheat", "Maize", "Corn", "Barley"], "Pulses": ["Green gram", "Black gram", "Red gram", "Bengal gram", "Cowpea", "Chickpea", "Lentil"], "Oilseeds": ["Mustard", "Sesame", "Rapeseed", "Groundnut", "Soybean", "Sunflower"], "Vegetables": ["Potato", "Onion", "Tomato", "Chilli", "Cauliflower", "Broccoli", "Cabbage", "Beans", "Cucumber", "Garlic", "Okra"], "Fruits": ["Mango", "Grapes", "Apple", "Orange", "Guava", "Lichi", "Papaya"], "Cash crops": ["Jute", "Sugarcane", "Cotton"] };
+
+		$("#crop_group").on('change', function () {
+			var crops = crop_group_data[this.value];
+			var cro = "<option selected disabled>Select Crop</option>";
+			for (let i = 0; i < crops.length; i++) {
+				cro += "<option value='" + crops[i] + "'>" + crops[i] + "</option>\n";
+			}
+			//console.log(dis);
+			$("#crop").html(cro);
+		});
+
+	</script>
+</body>
+
+</html>

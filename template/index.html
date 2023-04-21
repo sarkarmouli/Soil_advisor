@@ -1,0 +1,118 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <style>
+    body {
+      background-image: url('/static/soil.jpg');
+      background-repeat: no-repeat;
+      background-attachment: fixed;
+      background-size: cover;
+      background-position: center;
+      height: 100%;
+    }
+  </style>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Soil Properties Prediction</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+
+</head>
+<!-- <style>
+       body
+        {
+          background-image:url({{url_for("static",filename="soil_.jpg")}})
+        }
+       </style> -->
+
+<body>
+  <nav class="navbar navbar-expand-lg " style="background-color: #91cb1b;">
+    <div class="image">
+      <img src="static/IIT KGP.png" height="70px" width="70px" class="img-thumbnail" alt="IIT Kharagpur">
+    </div>
+    <div class="container-fluid">
+      <a class="navbar-brand" href="#" style="font-weight: bold;font-size: x-large;">Soil Advisor</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+        aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+          <!-- <li class="nav-item">
+            <a class="nav-link active" aria-current="page" href="#"><b>Home</b></a>
+          </li> -->
+          <li class="nav-item">
+            <a class="nav-link" href="pages/sample_registration.html"><b>Sample Registration</b></a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="pages/crop_details.html"><b>Crop Details</b></a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="pages/pxrf_values.html"><b>PXRF Values</b></a>
+
+          </li>
+          <!-- <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              Dropdown
+            </a>
+            <ul class="dropdown-menu">
+              <li><a class="dropdown-item" href="#">Agro-Climatic Region</a></li>
+              <li><a class="dropdown-item" href="#">Soil Order</a></li>
+              <li>
+                <hr class="dropdown-divider">
+              </li>
+              <li><a class="dropdown-item" href="#">Soil Productivity Potential</a></li>
+              <li><a class="dropdown-item" href="#">Soil Parent Material</a></li>
+              <li><a class="dropdown-item" href="#">Soil pH</a></li>
+              <li><a class="dropdown-item" href="#">Soil Organic Carbon</a></li>
+            </ul>
+          </li> -->
+          <li class="nav-item">
+            <a class="nav-link" href="pages/result.html"><b>Result</b></a>
+          </li>
+        </ul>
+        <form class="d-flex" role="search">
+          <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+          <button class="btn btn-primary" type="submit">Search</button>
+        </form>
+      </div>
+    </div>
+  </nav>
+  <div class="row p-lg-4">
+    <div class="col-md-8">
+      <div class="content" style="padding-left:16px">
+        <h2><b><strong> SOIL ADVISOR </strong> </b> <br><span> <b>Healthy soil, healthy plants, healthy people.</b>
+          </span><br></h2>
+        <p class="par"> Welcome to our Soil Advisor website!
+          <br>We are here to provide you with expert guidance and <br>
+          resources on all things related to soil health and management.<br><span>
+            As a soil advisor, my primary role is to provide advice <br> and
+            recommendations to farmers, gardeners, and landowners <br> on how to manage and improve their soil
+            health.</span>
+        </p>
+        <button class="btn btn-primary">Click here to Proceed</button>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="card mx-lg-2">
+        <form method='GET' action="http://127.0.0.1:5000" class="mx-lg-4 my-lg-3">
+          <div class="mb-3 mt-3">
+            <label for="email" class="form-label">Email</label>
+            <input type="email" class="form-control" id="email" placeholder="Enter email" name="email">
+          </div>
+          <div class="mb-3">
+            <label for="pwd" class="form-label">Password</label>
+            <input type="password" class="form-control" id="pwd" placeholder="Enter password" name="pswd">
+          </div>
+          <button type="submit" class="btn btn-primary btn-block">Submit</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</body>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"
+  integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script>
+</body>
+
+</html>

@@ -1,0 +1,25 @@
+
+/* @import url(https://fonts.googleapis.com/css?family=Poppins); */
+
+* {
+    margin: 0;
+    padding: 0;
+    /* box-sizing: border-box;
+    font-family: "Poppins", sans-serif; */
+}
+
+.main {
+    /* position: fixed;
+    top: 0;
+    left:0; */
+    width:100%;
+    /* padding: 30px 12.5%; */
+    background: linear-gradient(to top,rgba(0,0,0.5)50%,rgba(0,0,0.5)50%,);url(soil_.png);
+    background-position:center;
+    background-size:cover;
+    height: 109vh;
+    /* display: flex;
+    justify-content: space-between;
+    align-items: center;
+    z-index: 100; */
+}

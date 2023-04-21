@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <title>Document</title>
+</head>
+<body>
+<div class="container_fluid">
+{% block content %}
+
+<h1>Soil Sample Database</h1>
+
+	<table>
+	 <thead>
+	    <th>ID</th>
+	    <th>State</th>
+	    <th>District</th>
+	    <th>Block</th>
+	    <th>Village</th>
+	    <th>Name</th>
+	    <th>Phone</th>
+	    <th>Prev Crop</th>
+	    <th>Crop Group</th>
+	    <th>Crop</th>
+	    <th>Variety</th>
+	    <th>Season</th>
+	    <th>Soil Type</th>
+	    <th>Crop Duration</th>
+	    <th>Irrigation</th>
+	 </thead>
+	 {% for data in profiles %}
+	 <tbody>
+	    <td>{{data.id}}</td>
+	    <td>{{data.state}}</td>
+	    <td>{{data.district}}</td>
+	    <td>{{data.block}}</td>
+	    <td>{{data.village}}</td>
+	    <td>{{data.name}}</td>
+	    <td>{{data.phone}}</td>
+	    <td>{{data.prev_crop}}</td>
+	    <td>{{data.crop_group}}</td>
+	    <td>{{data.crop}}</td>
+	    <td>{{data.variety}}</td>
+	    <td>{{data.season}}</td>
+	    <td>{{data.soil_type}}</td>
+	    <td>{{data.crop_duration}}</td>
+	    <td>{{data.irrigation}}</td>
+	 </tbody>
+	 {% endfor%}
+	</table>
+
+{% endblock %}
+</div>
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.7/dist/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+</body>
+</html>
