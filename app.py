@@ -178,17 +178,17 @@ def predict():
         print(prediction)
 
         if (prediction[0] == 0):
-            return 'The agro-climatic region is Coastal Saline zone'
+            return 'The soil sample belongs to Coastal Saline zone. '
         elif (prediction[0] == 1):
-            return 'The agro-climatic region is Gangetic Alluvial Zone'
+            return 'The soil sample belongs to Gangetic Alluvial Zone.'
         elif (prediction[0] == 2):
-            return 'The agro-climatic region is Red and Lateritic zone '
+            return 'The soil sample belongs to Red and Lateritic zone. '
         elif (prediction[0] == 3):
-            return 'The agro-climatic region is Terai-Teesta Alluvial '
+            return 'The soil sample belongs to Terai-Teesta Alluvial. '
         elif (prediction[0] == 4):
-            return 'The agro-climatic region is Vindhyachal alluvial zone'
+            return 'The soil sample belongs to Vindhyachal alluvial zone.'
         else:
-            return 'The agro-climatic region is northern hilley zone '
+            return 'The soil sample belongs to northern hilley zone. '
 
     def func_pm(full_inp):
         with open('static/models/pm_lgb.pkl', 'rb') as f:
@@ -203,13 +203,13 @@ def predict():
         print(prediction)
 
         if (prediction[0] == 0):
-            return 'The parent material is Recent alluvium'
+            return 'Soil parent material is Recent alluvium that is rich in nutrients and very fertile.'
         elif (prediction[0] == 1):
-            return 'The parent material is old alluvium'
+            return 'Soil parent material is old alluvium that is found at higher elevation level and less fertile.'
         elif (prediction[0] == 2):
-            return 'The parent material is Granite-Gneiss'
+            return 'Soil parent material is Granite-Gneiss that tends to well-drained and nutrient poor. '
         else:
-            return 'The parent material is deltaic alluvium'
+            return 'Soil parent material is deltaic alluvium, very fertile due to high nutrient content.'
 
     def func_so(full_inp):
         with open('static/models/so_xgb.pkl', 'rb') as f:
@@ -224,11 +224,11 @@ def predict():
         print(prediction)
 
         if (prediction[0] == 0):
-            return 'Soil Order is alfisol'
+            return 'Soil Order is alfisol that is well-drained soil with high fertility and suitable for crops.'
         elif (prediction[0] == 1):
-            return 'The Soil Order is inceptisol'
+            return 'Soil Order is inceptisol that is young soil with moderate fertilty and good for crops with proper management.'
         else:
-            return 'The Soil Order is entisol'
+            return 'Soil Order is entisol that is newly-formed low fertilie soil, suitable for natural vegetation. '
 
     def func_pp(full_inp):
         with open('static/models/pp_xgb.pkl', 'rb') as f:
@@ -243,11 +243,11 @@ def predict():
         print(prediction)
 
         if (prediction[0] == 0):
-            return 'Soil productivity potential high'
+            return 'Soil productivity potential is high that is recommended to grow high value cash crops,fruits,vegetables.'
         elif (prediction[0] == 1):
-            return 'Soil productivity potential medium'
+            return 'Soil productivity potential is medium that is good to cultivate moderately priced crops with avg yield potential.'
         else:
-            return 'Soil productivity potential low'
+            return 'Soil productivity potential is low that is recommended to implement soil conservation practices.'
 
     def func_OC(full_inp):
         with open('static/models/OC_rfc.pkl', 'rb') as f:
@@ -262,11 +262,11 @@ def predict():
         print(prediction)
 
         if (prediction[0] == 0):
-            return 'Organic Carbon in soil medium'
+            return 'Organic Carbon in soil is medium, it can be improved through no-till or reduce tillage & using cover crops, crop rotation.'
         elif (prediction[0] == 1):
-            return 'Organic Carbon in soil low'
+            return 'Organic Carbon in soil is low, it can be improved by adding manures and some practices.'
         else:
-            return 'Organic Carbon in soil high'
+            return 'Organic Carbon in soil high, it is better to avoid over-ferilizing and  maintain the soil health by crop-rotations.'
 
     def func_pH(full_inp):
         with open('static/models/pH_rfc.pkl', 'rb') as f:
@@ -284,7 +284,7 @@ def predict():
         elif (prediction[0] == 1):
             return 'Soil is neutral to slightly alkaline'
         else:
-            return 'Soil is strongly to highly acidic'
+            return 'Soil is strongly to highly acidic '
 
     agc_result = func_agc(full_inp)
     pm_result = func_pm(full_inp)
