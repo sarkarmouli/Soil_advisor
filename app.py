@@ -275,11 +275,11 @@ def predict():
         prediction = rfc.predict(input_data_reshaped)
 
         if (prediction[0] == 0):
-            return 'Soil is moderately to slightly acidic'
+            return 'Soil is moderately to slightly acidic.'
         elif (prediction[0] == 1):
-            return 'Soil is neutral to slightly alkaline'
+            return 'Soil is neutral to slightly alkaline.'
         else:
-            return 'Soil is strongly to highly acidic '
+            return 'Soil is strongly to highly acidic.'
 
     agc_result = func_agc(full_inp)
     pm_result = func_pm(full_inp)
