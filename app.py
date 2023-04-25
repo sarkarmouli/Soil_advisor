@@ -15,7 +15,6 @@
 
 from flask import Flask, request, render_template, send_from_directory, jsonify
 from flask.templating import render_template
-from flask_sqlalchemy import SQLAlchemy
 import os
 import json
 import numpy as np
@@ -52,41 +51,38 @@ with open(os.path.abspath('static/data.json')) as f:
 app = Flask(__name__, template_folder='template')
 app.debug = True
 
-# adding configuration for using a sqlite database
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///project.db'
 
-# Creating an SQLAlchemy instance
-db = SQLAlchemy(app)
-app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+
+
 
 # Models
 
 
-class Profile(db.Model):
-    id = db.Column(db.Integer, primary_key=True)
-    state = db.Column(db.String(100), unique=False, nullable=False)
-    district = db.Column(db.String(100), unique=False, nullable=False)
-    block = db.Column(db.String(100), unique=False, nullable=False)
-    village = db.Column(db.String(100), unique=False, nullable=False)
-    name = db.Column(db.String(100), unique=False, nullable=False)
-    phone = db.Column(db.Integer, nullable=False)
-    prev_crop = db.Column(db.String(100), unique=False, nullable=False)
+# class Profile(db.Model):
+#     id = db.Column(db.Integer, primary_key=True)
+#     state = db.Column(db.String(100), unique=False, nullable=False)
+#     district = db.Column(db.String(100), unique=False, nullable=False)
+#     block = db.Column(db.String(100), unique=False, nullable=False)
+#     village = db.Column(db.String(100), unique=False, nullable=False)
+#     name = db.Column(db.String(100), unique=False, nullable=False)
+#     phone = db.Column(db.Integer, nullable=False)
+#     prev_crop = db.Column(db.String(100), unique=False, nullable=False)
 
-    crop_group = db.Column(db.String(100), unique=False, nullable=True)
-    crop = db.Column(db.String(100), unique=False, nullable=True)
-    variety = db.Column(db.String(100), unique=False, nullable=True)
-    season = db.Column(db.String(100), unique=False, nullable=True)
-    soil_type = db.Column(db.String(100), unique=False, nullable=True)
-    crop_duration = db.Column(db.String(100), unique=False, nullable=True)
-    irrigation = db.Column(db.String(100), unique=False, nullable=True)
+#     crop_group = db.Column(db.String(100), unique=False, nullable=True)
+#     crop = db.Column(db.String(100), unique=False, nullable=True)
+#     variety = db.Column(db.String(100), unique=False, nullable=True)
+#     season = db.Column(db.String(100), unique=False, nullable=True)
+#     soil_type = db.Column(db.String(100), unique=False, nullable=True)
+#     crop_duration = db.Column(db.String(100), unique=False, nullable=True)
+#     irrigation = db.Column(db.String(100), unique=False, nullable=True)
 
-    # repr method represents how one object of this datatable
-    # will look like
-    def __repr__(self):
-        return f"Name : {self.name}"
+#     # repr method represents how one object of this datatable
+#     # will look like
+#     def __repr__(self):
+#         return f"Name : {self.name}"
 
 
-migrate = Migrate(app, db, render_as_batch=True)
+# migrate = Migrate(app, db, render_as_batch=True)
 
 
 @app.route("/")
@@ -123,23 +119,22 @@ def get_area_data(filter):
         return json.dumps({"villages": list(area_data[state][district][block])})
 
 
-@app.route('/pages/<crop_details>', methods=["GET", "POST"])
-def index2():
-    if request.method == "POST":
-        pid = request.form.get("id")
-        data = Profile.query.get(pid)
+# @app.route('/pages/<crop_details>', methods=["GET", "POST"])
+# def index2():
+#     if request.method == "POST":
+#         pid = request.form.get("id")
 
-        data.crop_group = request.form.get("crop_group")
-        data.crop = request.form.get("crop")
-        data.season = request.form.get("season")
-        data.soil_type = request.form.get("soil_type")
-        data.crop_duration = request.form.get("crop_duration")
-        data.irrigation = request.form.get("irrigation")
+#         data.crop_group = request.form.get("crop_group")
+#         data.crop = request.form.get("crop")
+#         data.season = request.form.get("season")
+#         data.soil_type = request.form.get("soil_type")
+#         data.crop_duration = request.form.get("crop_duration")
+#         data.irrigation = request.form.get("irrigation")
 
-        db.session.commit()
-        return render_template("crop_details.html", id=pid, data=",".join([str(data.crop), str(data.variety)]))
-    else:
-        return render_template("sample_registration.html")
+#         db.session.commit()
+#         return render_template("crop_details.html", data=",".join([str(data.crop), str(data.variety)]))
+#     else:
+#         return render_template("sample_registration.html")
 
 
 @app.route('/predict', methods=["GET", "POST"])
