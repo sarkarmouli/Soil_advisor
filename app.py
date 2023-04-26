@@ -186,7 +186,7 @@ def predict():
             return 'The soil sample belongs to northern hilley zone. '
 
     def func_pm(full_inp):
-        with open('static/models/pm_lgb.pkl', 'rb') as f:
+        with open('static/models/pm_xgb.pkl', 'rb') as f:
             lgb = pickle.load(f)
         # changing the input_data to numpy array
         input_data_as_numpy_array = np.asarray(full_inp)
